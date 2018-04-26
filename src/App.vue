@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <router-view name="weibo"/>
     <router-view/>
   </div>
 </template>
