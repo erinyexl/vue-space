@@ -7,7 +7,8 @@ Vue.use(Vuex);
 const state = {
   isCloseEyes: false,
   newsLists: [],
-  newsDetails: {}
+  newsDetails: {},
+  weiboLists: []
 }
 
 const mutations = {
@@ -35,6 +36,9 @@ const mutations = {
   },
   undateNewsDetails(state,data){
     state.newsDetails = {...data[0]};
+  },
+  updateWeiboLists(state,data){
+    state.weiboLists = [...data];console.log(state.weiboLists)
   }
 }
 

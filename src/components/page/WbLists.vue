@@ -1,55 +1,62 @@
 <template>
-  <article class="list-wrap">
-    <header>
-      <div class="user-author">
-        <img src="../../assets/test.jpg" alt="">
-        <div>V</div>
-      </div>
-      <div class="user-info">
-        <p>姓名</p>
-        <span>1分钟前</span>
-      </div>
-      <div class="down-icon">
-        <div></div>
-      </div>
-    </header>
-    <section>
-      <p>等飞机，练习自拍中...就是这么肤浅</p>
-      <div class="user-images">
-        <div><img src="../../assets/test.jpg" alt=""></div>
-        <div><img src="../../assets/test.jpg" alt=""></div>
-        <div><img src="../../assets/test.jpg" alt=""></div>
-        <div><img src="../../assets/test.jpg" alt=""></div>
-        <div><img src="../../assets/test.jpg" alt=""></div>
-      </div>
-    </section>
-    <footer>
-      <div>1663</div>
-      <div>238</div>
-      <div>24</div>
-      <div>share</div>
-    </footer>
-  </article>
+  <div>
+    <article class="list-wrap" v-for="item in weiboLists">
+      <header>
+        <div class="user-author">
+          <img src="../../assets/test.jpg" alt="">
+          <div>V</div>
+        </div>
+        <div class="user-info">
+          <p>{{item}}</p>
+          <span>1分钟前</span>
+        </div>
+        <div class="down-icon">
+          <div></div>
+        </div>
+      </header>
+      <section>
+        <p>{{item.text}}</p>
+        <div class="user-images"></div>
+      </section>
+      <footer>
+        <div>1663</div>
+        <div>238</div>
+        <div>24</div>
+        <div>share</div>
+      </footer>
+    </article>
+  </div>
 </template>
 
 <script>
+  import store from '@/vuex/store';
+  import {mapState, mapMutations} from 'vuex';
   import axios from 'axios';
 
   export default {
+    name: 'weiboLists',
+    store,
     beforeCreate(){
       axios({
-        method: 'post',
-        url: '/api/get_token_info',
-        data: {
-          access_token: '2.00kztUyBlLpFLE72447ed797QGTYZC'
+        method: 'GET',
+        url: '/api/statuses_show',
+        params: {
+          access_token: '2.00kztUyBlLpFLE72447ed797QGTYZC',
+          id: 4146929338566929
         }
       })
         .then(function (res) {
-          console.log(res.data);
+          store.commit('updateWeiboLists',res.data);
         })
         .catch(function (err) {
           console.log(err);
         });
+    },
+    computed:{
+      ...mapState(['weiboLists'])
+    },
+    methods:{
+      ...mapMutations(['updateWeiboLists'])
     }
   }
 </script>
