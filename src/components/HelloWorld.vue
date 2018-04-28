@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import store from '@/vuex/store';
+import store from '@/vuex/store-test';
 import {mapState, mapMutations, mapGetters, mapActions} from 'vuex';
 
 import axios from 'axios';
@@ -20,17 +20,7 @@ export default {
   data () {
     return {}
   },
-  created:function (){
-           // axios({
-           //  methods:'get',
-           //  url:'/api/2/statuses/public_timeline.json',
-           //  data:{
-           //    appkey:'3828459437',
-           //   access_token:'2.00kztUyBlLpFLE72447ed797QGTYZC',
-           //   count:10
-           // }
-           // })
-   },
+  created:function (){},
   computed:{
     ...mapState(['count']),
     // ...mapGetters(['count'])

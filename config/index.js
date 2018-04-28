@@ -10,9 +10,18 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
+    // proxyTable: {   //用于跨域访问接口
+    //     '/api': {
+    //           target: 'https://api.weibo.com',
+    //           changeOrigin: true,
+    //           pathRewrite: {
+    //             '^/api': ''
+    //           }
+    //         }
+    // },
     proxyTable: {   //用于跨域访问接口
         '/api': {
-              target: 'https://api.weibo.com',
+              target: 'http://www.test.com:3000',
               changeOrigin: true,
               pathRewrite: {
                 '^/api': ''
@@ -22,6 +31,7 @@ module.exports = {
 
     // Various Dev Server settings
     host: 'www.test.com', // can be overwritten by process.env.HOST
+    // host: 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,

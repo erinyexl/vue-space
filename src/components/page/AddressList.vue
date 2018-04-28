@@ -35,7 +35,7 @@
     }
 </script>
 
-<script scoped lang="less">
+<style scoped lang="less">
     @hello:#dd4433;
 
     .ar-lists{
@@ -51,4 +51,4 @@
         background: #eee;
         margin: 20px 0;
     }
-</script>
+</style>
