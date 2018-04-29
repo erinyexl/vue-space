@@ -5,6 +5,7 @@ import axios from 'axios';
 Vue.use(Vuex);
 
 const state = {
+  selected: "weibo",
   isCloseEyes: false,
   newsLists: [],
   newsDetails: {},
@@ -12,6 +13,9 @@ const state = {
 }
 
 const mutations = {
+  changeTabSel(state,data){
+    state.selected = data;
+  },
   wbLogin(state){
     axios({
       methods: 'get',
@@ -38,7 +42,7 @@ const mutations = {
     state.newsDetails = {...data[0]};
   },
   updateWeiboLists(state,data){
-    state.weiboLists = [...data];console.log(state.weiboLists)
+    state.weiboLists = [...data.statuses];
   }
 }
 

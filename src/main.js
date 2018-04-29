@@ -6,7 +6,7 @@ import App from './App'
 import router from './router'
 
 // import 'normalize.css'
-import './common.css'
+import './components/common/global.css'
 
 import 'lib-flexible/flexible.js'
 

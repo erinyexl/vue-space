@@ -1,0 +1,60 @@
+@font-face {
+  font-family: 'iconfont';  /* project id 648231 */
+  src: url('//at.alicdn.com/t/font_648231_dx8wysisjoxenrk9.eot');
+  src: url('//at.alicdn.com/t/font_648231_dx8wysisjoxenrk9.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_648231_dx8wysisjoxenrk9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_648231_dx8wysisjoxenrk9.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_648231_dx8wysisjoxenrk9.svg#iconfont') format('svg');
+}
+.iconfont{
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;}
+
+/*CSS RESET*/
+/*去掉ios系统中元素被触摸时产生的半透明灰色遮罩+部分android系统中元素被点击时产生的边框*/
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+body{
+  font-family: Helvetica;
+}
+body, p, h1, h2, h3, h4, h5, h6, dl, dd, figure {
+  margin: 0;
+  padding: 0;
+}
+ol, ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+}
+img {
+  border: none;
+  vertical-align: top;
+}
+th, td {
+  padding: 0;
+}
+form, select {
+  margin: 0;
+}
+input, textarea {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  -webkit-appearance: none;
+  background: transparent;
+}
+textarea {
+  resize: none;
+  -webkit-appearance: none;
+}
+
+

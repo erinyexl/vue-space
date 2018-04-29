@@ -4,6 +4,8 @@ import Login from '@/components/page/Login'
 import NewsLists from '@/components/NewsLists'
 import NewsDetails from '@/components/NewsDetails'
 import WbLists from '@/components/page/WbLists'
+import Tabbar from '@/components/page/Tabbar'
+import UserCenter from '@/components/UserCenter'
 
 Vue.use(Router);
 
@@ -14,8 +16,16 @@ export default new Router({
       path: '/',
       name: '/',
       components: {
-        default: WbLists
+        default: Tabbar,
+        home: NewsLists,
+        weibo: WbLists,
+        user: UserCenter
       }
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     },
     {
       path: '/news-details',

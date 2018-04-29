@@ -1,28 +1,32 @@
 <template>
   <div>
-    <article class="list-wrap" v-for="item in weiboLists">
-      <header>
+    <article class="list-article" v-for="item in weiboLists">
+      <header class="user-wrap">
         <div class="user-author">
-          <img src="../../assets/test.jpg" alt="">
-          <div>V</div>
+          <div class="user-avator"><img :src="item.user.profile_image_url" alt=""></div>
+          <div class="user-verified" v-if="item.user.verified"><i class="iconfont i-vip">&#xe613;</i></div>
         </div>
         <div class="user-info">
-          <p>{{item}}</p>
-          <span>1分钟前</span>
+          <p class="user-pub-name">{{item.user.screen_name}}</p>
+          <span class="user-pub-time"></span>
+          <span class="user-pub-from" v-html="'来自 '+item.source"></span>
         </div>
-        <div class="down-icon">
-          <div></div>
+        <div class="user-arrow">
+          <div><i class="iconfont i-arrow-down">&#xe600;</i></div>
         </div>
       </header>
-      <section>
-        <p>{{item.text}}</p>
-        <div class="user-images"></div>
+      <section class="detail-wrap">
+        <p class="detail-text">{{item.text}}</p>
+        <div class="detail-images" v-if="item.pic_urls.length">
+          <div class="detail-item" v-for="pic in item.pic_urls"
+               :style="{backgroundImage:'url(' + pic.thumbnail_pic + ')'}"></div>
+        </div>
       </section>
-      <footer>
-        <div>1663</div>
-        <div>238</div>
-        <div>24</div>
-        <div>share</div>
+      <footer class="action-wrap">
+        <div><i class="iconfont i-reposts">&#xe609;</i>{{item.reposts_count}}</div>
+        <div><i class="iconfont i-comments">&#xe608;</i>{{item.comments_count}}</div>
+        <div><i class="iconfont i-attitudes">&#xe70d;</i>{{item.attitudes_count}}</div>
+        <div><i class="iconfont i-share">&#xe612;</i></div>
       </footer>
     </article>
   </div>
@@ -36,118 +40,148 @@
   export default {
     name: 'weiboLists',
     store,
-    beforeCreate(){
+    beforeCreate() {
       axios({
         method: 'GET',
-        url: '/api/statuses_show',
+//        url: '/api/home_timeline',
+        url: './static/data-weibo.json',
         params: {
           access_token: '2.00kztUyBlLpFLE72447ed797QGTYZC',
-          id: 4146929338566929
+          count: 1
         }
       })
         .then(function (res) {
-          store.commit('updateWeiboLists',res.data);
+          store.commit('updateWeiboLists', res.data);
         })
         .catch(function (err) {
           console.log(err);
         });
     },
-    computed:{
+    computed: {
       ...mapState(['weiboLists'])
     },
-    methods:{
+    methods: {
       ...mapMutations(['updateWeiboLists'])
     }
   }
 </script>
 
 <style lang="less">
+  @minor-color: #999;
+
   body {
     background: #eee;
+    color: #333;
   }
 
-  .list-wrap {
+  .list-article {
     margin: 30px 0;
-    padding: 40px;
+    padding: 0 30px;
     background: #fff;
     font-size: 18px; /*px*/
   }
 
-  header {
+  .user-wrap {
     display: flex;
     align-items: center;
+    padding-top: 30px;
   }
 
   .user-author {
     flex: 1;
-    margin-right: 30px;
+    margin-right: 20px;
     position: relative;
+  }
+
+  .user-avator {
     img {
-      width: 100px;
-      height: 100px;
+      width: 90px;
+      height: 90px;
       border-radius: 50px;
     }
-    div {
-      position: absolute;
-      right: 0;
-      bottom: -10px;
-      width: 30px;
-      height: 30px;
-      line-height: 30px;
-      text-align: center;
-      border-radius: 15px;
-      color: #fff;
-      background: #f64e45;
-      font-size: 14px; /*px*/
+  }
+
+  .user-verified {
+    position: absolute;
+    right: 0;
+    bottom: -16px;
+    .i-vip {
+      color: #ff9712;
+      font-size: 32px; /*px*/
     }
   }
 
   .user-info {
     flex: 9;
-    p {
-      font-size: 16px; /*px*/
-      font-weight: bold;
-    }
-    span {
-      font-size: 12px; /*px*/
+  }
+
+  .user-pub-name {
+    font-size: 30px; /*px*/
+    font-weight: bold;
+  }
+
+  .user-pub-tine {
+    font-size: 18px; /*px*/
+    line-height: 30px;
+    color: @minor-color;
+  }
+
+  .user-pub-from {
+    margin-left: 10px;
+    a {
+      color: @minor-color;
     }
   }
 
-  .down-icon {
+  .user-arrow {
     position: relative;
     div {
-      width: 20px;
-      height: 20px;
-      transform-origin: center center;
-      transform: rotate(-45deg);
-      border-left: 1px solid #999; /*no*/
-      border-bottom: 1px solid #999; /*no*/
+      padding-bottom: 20px;
+    }
+    .i-arrow-down {
+      color: @minor-color;
+      font-size: 28px; /*px*/
     }
   }
 
-  section {
+  .detail-wrap {
     margin: 30px 0;
   }
 
-  .user-images {
+  .detail-text {
+    font-size: 32px; /*px*/
+    line-height: 40px; /*px*/
+    word-break: break-all;
+  }
+
+  .detail-images {
     display: flex;
     flex-flow: row wrap;
     padding-top: 20px;
-    div {
-      width: 220px;
-      height: 220px;
-      overflow: hidden;
-    }
-    img {
-      width: 100%;
-      height: 100%;
-    }
+    margin: -3px; /*no*/
   }
 
-  footer {
+  .detail-item {
+    flex: 0 0 33%;
+    padding-top: 30%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-clip: padding-box;
+    box-sizing: border-box;
+    border: 3px solid transparent; /*no*/
+  }
+
+  .action-wrap {
+    padding: 30px 0;
     display: flex;
     justify-content: space-between;
-    font-size: 12px; /*px*/
-    color: #999;
+    font-size: 32px; /*px*/
+    color: @minor-color;
+    border-top: 1px solid #eee; /*no*/
+    i {
+      font-size: 36px; /*px*/
+      padding-right: 10px;
+    }
   }
 </style>

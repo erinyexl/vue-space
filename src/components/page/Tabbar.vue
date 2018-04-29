@@ -1,40 +1,56 @@
 <template>
-    <div id="tabbarContainer">
-        <mt-tabbar v-model="selected" fixed>
-          <mt-tab-item id="外卖">
-            <img slot="icon" src="../../assets/logo.png" height="200" width="200">
-            外卖
-          </mt-tab-item>
-          <mt-tab-item id="订单">
-            <img slot="icon" src="../../assets/logo.png" height="200" width="200">
-            订单
-          </mt-tab-item>
-          <mt-tab-item id="发现">
-            <img slot="icon" src="../../assets/logo.png" height="200" width="200">
-            发现
-          </mt-tab-item>
-          <mt-tab-item id="我的">
-            <img slot="icon" src="../../assets/logo.png" height="200" width="200">
-            我的
-          </mt-tab-item>
-        </mt-tabbar>
-    </div>  
+  <div id="tabbarContainer">
+    <mt-tabbar v-model="selected" fixed @click="changeTabSel">
+      <mt-tab-item id="home">
+        <div><i class="iconfont i-home">&#xe619;</i></div>
+      </mt-tab-item>
+      <mt-tab-item id="weibo">
+        <div><i class="iconfont i-wiebo">&#xe621;</i></div>
+      </mt-tab-item>
+      <mt-tab-item id="user">
+        <div><i class="iconfont i-user">&#xe651;</i></div>
+      </mt-tab-item>
+    </mt-tabbar>
+  </div>
 </template>
 
 <script>
-export default {
+  import store from '@/vuex/store';
+  import {mapState, mapMutations} from 'vuex';
+
+  export default {
     name: 'Tabbar',
-    data(){
-        return{
-            "selected": "外卖"
+    store,
+    computed:{
+      selected: {
+        get () {
+          return this.$store.state.selected
+        },
+        set (value) {
+          this.$store.commit('changeTabSel', value)
         }
+      }
     },
-    created(){
-        
+    methods: {
+      ...mapMutations(['changeTabSel'])
     }
-}
+  }
 </script>
 
-<style>
-    
+<style lang="less">
+  .mint-tabbar.is-fixed {
+    padding: 15px 0;
+    border-top: 1px solid #999; /*no*/
+  }
+
+  .mint-tabbar > .mint-tab-item.is-selected {
+    background-color: #fff;
+    color: #26a2ff;
+  }
+
+  .mint-tab-item-label {
+    i {
+      font-size: 40px; /*px*/
+    }
+  }
 </style>
