@@ -1,17 +1,15 @@
 <template>
-  <div id="tabbarContainer">
-    <mt-tabbar v-model="selected" fixed @click="changeTabSel">
-      <mt-tab-item id="home">
-        <div><i class="iconfont i-home">&#xe619;</i></div>
-      </mt-tab-item>
-      <mt-tab-item id="weibo">
-        <div><i class="iconfont i-wiebo">&#xe621;</i></div>
-      </mt-tab-item>
-      <mt-tab-item id="user">
-        <div><i class="iconfont i-user">&#xe651;</i></div>
-      </mt-tab-item>
-    </mt-tabbar>
-  </div>
+  <mt-tabbar v-model="selected" fixed @click="changeTabSel">
+    <mt-tab-item id="home">
+      <div><i class="iconfont i-home">&#xe619;</i></div>
+    </mt-tab-item>
+    <mt-tab-item id="weibo">
+      <div><i class="iconfont i-wiebo">&#xe621;</i></div>
+    </mt-tab-item>
+    <mt-tab-item id="user">
+      <div><i class="iconfont i-user">&#xe651;</i></div>
+    </mt-tab-item>
+  </mt-tabbar>
 </template>
 
 <script>

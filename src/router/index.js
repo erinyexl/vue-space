@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Login from '@/components/page/Login'
 import NewsLists from '@/components/NewsLists'
 import NewsDetails from '@/components/NewsDetails'
-import WbLists from '@/components/page/WbLists'
+import WeiboLists from '@/components/page/WeiboLists'
 import Tabbar from '@/components/page/Tabbar'
 import UserCenter from '@/components/UserCenter'
 
@@ -18,7 +18,7 @@ export default new Router({
       components: {
         default: Tabbar,
         home: NewsLists,
-        weibo: WbLists,
+        weibo: WeiboLists,
         user: UserCenter
       }
     },

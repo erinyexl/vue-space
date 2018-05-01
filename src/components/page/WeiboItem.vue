@@ -7,7 +7,7 @@
           <div class="user-verified" v-if="item.user.verified"><i class="iconfont i-vip">&#xe613;</i></div>
         </div>
         <div class="user-info">
-          <p class="user-pub-name">{{item.user.screen_name}}</p>
+          <p class="user-pub-name" v-html="item.user.screen_name"></p>
           <span class="user-pub-time"></span>
           <span class="user-pub-from" v-html="'来自 '+item.source"></span>
         </div>
@@ -16,16 +16,16 @@
         </div>
       </header>
       <section class="detail-wrap">
-        <p class="detail-text">{{item.text}}</p>
+        <p class="detail-text" v-text="item.text"></p>
         <div class="detail-images" v-if="item.pic_urls.length">
           <div class="detail-item" v-for="pic in item.pic_urls"
                :style="{backgroundImage:'url(' + pic.thumbnail_pic + ')'}"></div>
         </div>
       </section>
       <footer class="action-wrap">
-        <div><i class="iconfont i-reposts">&#xe609;</i>{{item.reposts_count}}</div>
-        <div><i class="iconfont i-comments">&#xe608;</i>{{item.comments_count}}</div>
-        <div><i class="iconfont i-attitudes">&#xe70d;</i>{{item.attitudes_count}}</div>
+        <div><i class="iconfont i-reposts">&#xe609;</i><span v-text="item.reposts_count"></span></div>
+        <div><i class="iconfont i-comments">&#xe608;</i><span v-text="item.comments_count"></span></div>
+        <div><i class="iconfont i-attitudes">&#xe70d;</i><span v-text="item.attitudes_count"></span></div>
         <div><i class="iconfont i-share">&#xe612;</i></div>
       </footer>
     </article>
@@ -35,34 +35,13 @@
 <script>
   import store from '@/vuex/store';
   import {mapState, mapMutations} from 'vuex';
-  import axios from 'axios';
 
   export default {
-    name: 'weiboLists',
+    name: '',
     store,
-    beforeCreate() {
-      axios({
-        method: 'GET',
-//        url: '/api/home_timeline',
-        url: './static/data-weibo.json',
-        params: {
-          access_token: '2.00kztUyBlLpFLE72447ed797QGTYZC',
-          count: 1
-        }
-      })
-        .then(function (res) {
-          store.commit('updateWeiboLists', res.data);
-        })
-        .catch(function (err) {
-          console.log(err);
-        });
-    },
     computed: {
       ...mapState(['weiboLists'])
     },
-    methods: {
-      ...mapMutations(['updateWeiboLists'])
-    }
   }
 </script>
 
